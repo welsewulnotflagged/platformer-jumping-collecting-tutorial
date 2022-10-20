@@ -13,15 +13,18 @@ public class PlayerScript : MonoBehaviour
 
     private int scoreValue = 0;
 
+    public GameObject winTextObject;
+
     // Start is called before the first frame update
     void Start()
     {
         rd2d = GetComponent<Rigidbody2D>();
         score.text = scoreValue.ToString();
+        winTextObject.SetActive(false);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         float hozMovement = Input.GetAxis("Horizontal");
         float vertMovement = Input.GetAxis("Vertical");
@@ -35,6 +38,7 @@ public class PlayerScript : MonoBehaviour
             scoreValue += 1;
             score.text = scoreValue.ToString();
             Destroy(collision.collider.gameObject);
+            SetCountText();
         }
 
     }
@@ -47,6 +51,12 @@ public class PlayerScript : MonoBehaviour
             {
                 rd2d.AddForce(new Vector2(0, 3), ForceMode2D.Impulse); //the 3 in this line of code is the player's "jumpforce," and you change that number to get different jump behaviors.  You can also create a public variable for it and then edit it in the inspector.
             }
+        }
+    }
+    private void SetCountText() 
+    {   if (scoreValue >= 4) 
+        {
+                winTextObject.SetActive(true);
         }
     }
 }
