@@ -55,9 +55,9 @@ public class PlayerScript : MonoBehaviour
     {
         rd2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        score.text = scoreValue.ToString();
-        lives.text = livesValue.ToString();
-        level.text = levelNumber.ToString();
+        score.text = "Score: " + scoreValue.ToString();
+        lives.text = "Lives: " + livesValue.ToString();
+        level.text = "Level: " + levelNumber.ToString();
 
         winTextObject.SetActive(false);
         loseTextObject.SetActive(false);
@@ -106,7 +106,7 @@ public class PlayerScript : MonoBehaviour
        if (collision.collider.tag == "Coin")
         {
             scoreValue += 1;
-            score.text = scoreValue.ToString();
+            score.text = "Score: " + scoreValue.ToString();
             AudioSource.PlayClipAtPoint(coinPickupAudio,transform.position);
             Destroy(collision.collider.gameObject);
             SetCountText();
@@ -115,7 +115,7 @@ public class PlayerScript : MonoBehaviour
         if (collision.collider.tag == "Enemy")
         {
             livesValue -= 1;
-            lives.text = livesValue.ToString();
+            lives.text = "Lives: " + livesValue.ToString();
             AudioSource.PlayClipAtPoint(enemyAudio,transform.position);
             Destroy(collision.collider.gameObject);
             SetCountText();
@@ -158,7 +158,7 @@ public class PlayerScript : MonoBehaviour
     {   if (scoreValue >= 4) 
         {
                 levelNumber = 2;
-                level.text = levelNumber.ToString();
+                level.text = "Level: " + levelNumber.ToString();
                 stage1.SetActive(false);
                 stage2.SetActive(true);
 
